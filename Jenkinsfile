@@ -27,9 +27,9 @@ pipeline{
 
                 ssh jenkins@naresh-app-server << EOF
                 
-                docker pull gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
+                docker pull gcr.io/lbg-mea-14/nm-pyt-app
 
-                docker run -d -p 80:8080 --name nm-pyt-app gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
+                docker run -d -p 80:8080 --name nm-pyt-app gcr.io/lbg-mea-14/nm-pyt-app
                 
                 '''
             }
