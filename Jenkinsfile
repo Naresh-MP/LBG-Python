@@ -8,7 +8,7 @@ pipeline{
             docker build -t gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER} .
             
             docker push gcr.io/lbg-mea-14/nm-pyt-app
-            docker push gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER} .
+            docker push gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
 
             '''
             }
@@ -17,7 +17,7 @@ pipeline{
             steps{
             sh '''
             docker rmi gcr.io/lbg-mea-14/nm-pyt-app
-            docker push gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
+            docker rmi gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
             '''
             }
         }
