@@ -1,13 +1,6 @@
 pipeline{
     agent any
     stages{
-        stage("Build the application"){
-            steps{
-            sh '''
-            python lbg.py
-            '''
-            }
-        }
         stage("Build docker image and publish "){
             steps{
             sh '''
