@@ -4,11 +4,11 @@ pipeline{
         stage("Build docker image and publish "){
             steps{
             sh '''
-            docker build -t gcr.io-docker.pkg.dev/lbg-mea-14/nm-pyt-app:latest .
-            docker build -t gcr.io-docker.pkg.dev/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER} .
+            docker build -t gcr.io/lbg-mea-14/nm-pyt-app:latest .
+            docker build -t gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER} .
             
-            docker push gcr.io-docker.pkg.dev/lbg-mea-14/nm-pyt-app
-            docker push gcr.io-docker.pkg.dev/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER} .
+            docker push gcr.io/lbg-mea-14/nm-pyt-app
+            docker push gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER} .
 
             '''
             }
@@ -16,8 +16,8 @@ pipeline{
         stage("Cleanup Jenkins"){
             steps{
             sh '''
-            docker rmi gcr.io-docker.pkg.dev/lbg-mea-14/nm-pyt-app
-            docker push gcr.io-docker.pkg.dev/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
+            docker rmi gcr.io/lbg-mea-14/nm-pyt-app
+            docker push gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
             '''
             }
         }
@@ -27,9 +27,9 @@ pipeline{
 
                 ssh jenkins@naresh-app-server << EOF
                 
-                docker pull gcr.io-docker.pkg.dev/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
+                docker pull gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
 
-                docker run -d -p 80:8080 --name nm-pyt-app gcr.io-docker.pkg.dev/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
+                docker run -d -p 80:8080 --name nm-pyt-app gcr.io/lbg-mea-14/nm-pyt-app:${BUILD_NUMBER}
                 
                 '''
             }
